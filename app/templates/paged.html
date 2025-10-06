@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="wrapper">
+    <div class="paged__content"> 
+    <div class="product__container">
+        <div class="product__list">
+        {% for product in produtos %}
+
+            <div class="product_card">
+                <h1>{{ product["nome"] }}</h1>
+                <p>R$ {{ product["preco"] }}</p>
+                <a href="seedetail/{{ product['id'] }}" class="product__btn">Ver detalhes</a>
+            </div>
+
+        {% endfor %}
+        </div>
+            
+        <form class="buttons">
+            <div class="prev">
+                <button name="page" value="{{page-1}}" {% if (page == 1 ) %} disabled {% endif %}><</a>
+            </div>
+            <div class="next">
+                <button name="page" value="{{page+1}}" {% if (page == total_page ) %} disabled {% endif %}>></a>
+            </div>  
+        </form>
+        <p class="text-center">{{ page }}/{{ total_page }}</p>
+    </div>
+
+    </div>
+</div>
+{% endblock %}
