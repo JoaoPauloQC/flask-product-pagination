@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="wrapper">
+    <div class="detailed__content">
+        <div class="detailed__product__card">
+            <div class="detailed__product__card__left">
+                <h1>{{ product['nome'] }}</h1>
+            </div>
+            <div class="detailed__product__card__right">
+                <p>R$ {{ product["preco"] }}</p>
+                <div class="detailed__product__card__right__btns">
+                    <button class="detailed__product__card__btn btn__green"> Comprar </button>
+                    <button class="detailed__product__card__btn btn__blue">Adicionar ao carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

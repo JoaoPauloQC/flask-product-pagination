@@ -6,14 +6,29 @@ from app import app
 produtos = [
     {"id": 1 , "nome": "Tênis", "preco": 5000},
     {"id": 2 , "nome": "Notebook", "preco": 10000},
-    {"id": 3 , "nome": "Monitor", "preco": 150},
-    {"id": 4 , "nome": "Tablet", "preco": 150},
-    {"id": 5 , "nome": "Teclado", "preco": 150},
-    {"id": 6 , "nome": "Celular", "preco": 150},
-    {"id": 7 , "nome": "Controle", "preco": 150},
-    {"id": 8 , "nome": "Controle", "preco": 150},
+    {"id": 3 , "nome": "Monitor", "preco": 1500},
+    {"id": 4 , "nome": "Tablet", "preco": 5500},
+    {"id": 5 , "nome": "Teclado", "preco": 340},
+    {"id": 6 , "nome": "Celular", "preco": 7500},
+    {"id": 7 , "nome": "Controle", "preco": 300},
+    {"id": 8 , "nome": "Bateria", "preco": 1500},
+    {"id": 9 , "nome": "Geladeira", "preco": 9000},
+    {"id": 10 , "nome": "Placa Mãe", "preco": 450},
+    {"id": 11 , "nome": "Mouse", "preco": 110},
+    {"id": 12 , "nome": "Óculos", "preco": 150},
+    {"id": 13 , "nome": "Strap", "preco": 20},
+    {"id": 14 , "nome": "Ventilador", "preco": 100},
+    {"id": 15 , "nome": "Freezer", "preco": 7000},
+    {"id": 16 , "nome": "Mousepad", "preco": 33},
+
 
 ]
+
+def findProductById(id):
+    for product in produtos:
+        if product["id"] == id:
+            return product
+    return False
 
 @app.route("/")
 def index():
@@ -32,6 +47,13 @@ def paged():
     total_page = math.ceil(len(produtos)/per_page)
     produtos_da_pagina = produtos[start:end]
     return render_template("paged.html",produtos=produtos_da_pagina,page=page,total_page = total_page)
+
+@app.route("/seedetail/<int:id>")
+def detailed(id):
+    product = findProductById(id)
+    if (product):
+        return render_template("detailed.html",product=product)
+    return redirect(url_for("index"))
 
 
 @app.route("/admin")
