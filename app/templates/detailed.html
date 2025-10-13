@@ -6,10 +6,10 @@
     <div class="detailed__content">
         <div class="detailed__product__card">
             <div class="detailed__product__card__left">
-                <h1>{{ product['nome'] }}</h1>
+                <h1>{{ product.getName() }}</h1>
             </div>
             <div class="detailed__product__card__right">
-                <p>R$ {{ product["preco"] }}</p>
+                <p>R$ {{ product.getPrice() }}</p>
                 <div class="detailed__product__card__right__btns">
                     <button class="detailed__product__card__btn btn__green"> Comprar </button>
                     <button class="detailed__product__card__btn btn__blue">Adicionar ao carrinho</button>

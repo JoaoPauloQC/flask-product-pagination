@@ -2,31 +2,35 @@
 
 {% block content %}
 <div class="wrapper">
-    <div class="paged__content"> 
+    <div class="paged__overlay hidden  absolute inset-0 ">
+        <div class="loading"></div>
+    </div> 
+    <div class="paged__content">
+    
     <div class="product__container">
         <div class="product__list">
-        {% for product in produtos %}
+        {% for product in products %}
 
-            <div class="product_card">
-                <h1>{{ product["nome"] }}</h1>
-                <p>R$ {{ product["preco"] }}</p>
-                <a href="seedetail/{{ product['id'] }}" class="product__btn">Ver detalhes</a>
+            <div class="product__card text-center">
+                <h1 class="product__card__title">{{ product.getName() }}</h1>
+                <p>R$ {{ product.getPrice() }}</p>
+                <a href="seedetail/{{ product.getId() }}" class="product__btn">Ver detalhes</a>
             </div>
 
         {% endfor %}
         </div>
             
         <form class="buttons">
-            <div class="prev">
-                <button name="page" value="{{page-1}}" {% if (page == 1 ) %} disabled {% endif %}><</a>
-            </div>
-            <div class="next">
-                <button name="page" value="{{page+1}}" {% if (page == total_page ) %} disabled {% endif %}>></a>
-            </div>  
+            
+            {% for i in range(1,total_page+1) %}
+                <button name="page" value="{{i}}" id="" class=" pagination__btn {% if i == page %} active__btn {% else %} unactive__btn {% endif %}">{{i}}</button>
+            {% endfor %}
         </form>
-        <p class="text-center">{{ page }}/{{ total_page }}</p>
+       
+        <p class="text-center pt-2">{{ page }}/{{ total_page }}</p>
     </div>
 
     </div>
+    <script src="{{ url_for("static",filename='paged.js') }}"></script>
 </div>
 {% endblock %}

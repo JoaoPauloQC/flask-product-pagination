@@ -5,13 +5,13 @@
     <div class="paged__content"> 
         <div class="product__container">
             <div class="product__list">
-            {% for product in produtos %}
+            {% for product in products %}
     
                 <div class="product_card">
-                    <h1>{{ product["nome"] }}</h1>
-                    <p>R$ {{ product["preco"] }}</p>
-                    <a href="seedetail/{{ product['id'] }}" class="product__btn">Ver detalhes</a>
-                    <button id="product-{{ product['id'] }}" class="exclude__btn">Excluir</button>
+                    <h1>{{ product.getName() }}</h1>
+                    <p>R$ {{ product.getPrice() }}</p>
+                    <a href="seedetail/{{ product.getId()] }}" class="product__btn">Ver detalhes</a>
+                    <button id="product-{{ product.getId() }}" class="exclude__btn">Excluir</button>
 
                 </div>
     

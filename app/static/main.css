@@ -16,8 +16,10 @@ body{
     
    
     display: flex;
-    flex-direction: column;
-    
+    flex-wrap: wrap;
+    justify-content: space-around;
+    row-gap: 30px;
+    padding-block: 25px;
     align-content: center;
     align-items: center;
 }
@@ -27,23 +29,57 @@ body{
     border-radius: 15px;
     box-shadow: -3px 1px 70px #e4e4e4;
 }
-.product_card{
+.product__card{
     display: flex;
-    gap: 200px;
+    flex-direction: column;
+    width: 200px;
+    
+    height: 300px;
+    gap: 10px;
     align-content: center;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 200px;
-    border-bottom: 1px solid grey;
+    border: 1px solid grey;
+    border-radius: 10px;
     
-    border-radius: 1px;
+}
+.product__card__title{
+    font-size: 20px;
+}
+.paged__overlay{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(238, 238, 238, 0.507);
+    height: 100%;
+}
+.loading{
+    width: 40px;
+    height: 40px;
+    border-bottom:2px solid grey;
+    border-right: 2px solid grey;
+    border-radius: 100%;
+    
+}
+.hidden{
+    display: none;
+}
+.absolute{
+    position: absolute;
+}
+.inset-0{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .buttons{
     padding-top: 15px;
     padding-inline: 12px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 5px;
 }
 .buttons button{
     font-weight: 900;
@@ -62,12 +98,11 @@ body{
     padding-block: 30px;
 }
 .buttons button{
-    background-color: rgb(0, 68, 255);
-    color: aliceblue;
-    border: 3px solid rgb(0, 68, 255);;
+    
+    border: 2.5px solid rgb(0, 68, 255);;
     cursor: pointer;
     border-radius: 5px;
-    transition: 250ms linear;
+    transition: 150ms linear;
 }
 .buttons button:hover{
     background-color: white;
@@ -89,7 +124,8 @@ body{
 .detailed__product__card{
     width: 100%;
     height: 400px;
-    display: grid;
+    display: grid; ;
+    color: black;
     grid-template-columns: 1fr 1fr;
     border: 0.7px solid grey;
     border-radius: 12px;
@@ -165,4 +201,15 @@ body{
 
 .btn-lg-p{
     padding: 6px 5px;
+}
+.active__btn{
+    background-color: white;
+    color: rgb(0, 68, 255);
+}
+.unactive__btn{
+    background-color: rgb(0, 68, 255);
+    color: aliceblue;
+}
+.pt-2{
+    padding-top: 10px;
 }

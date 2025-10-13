@@ -1,32 +1,13 @@
 from flask import (render_template,request,redirect,url_for,flash,abort,jsonify,session)
 import math
+import time
 from app import app
 
-
-produtos = [
-    {"id": 1 , "nome": "Tênis", "preco": 5000},
-    {"id": 2 , "nome": "Notebook", "preco": 10000},
-    {"id": 3 , "nome": "Monitor", "preco": 1500},
-    {"id": 4 , "nome": "Tablet", "preco": 5500},
-    {"id": 5 , "nome": "Teclado", "preco": 340},
-    {"id": 6 , "nome": "Celular", "preco": 7500},
-    {"id": 7 , "nome": "Controle", "preco": 300},
-    {"id": 8 , "nome": "Bateria", "preco": 1500},
-    {"id": 9 , "nome": "Geladeira", "preco": 9000},
-    {"id": 10 , "nome": "Placa Mãe", "preco": 450},
-    {"id": 11 , "nome": "Mouse", "preco": 110},
-    {"id": 12 , "nome": "Óculos", "preco": 150},
-    {"id": 13 , "nome": "Strap", "preco": 20},
-    {"id": 14 , "nome": "Ventilador", "preco": 100},
-    {"id": 15 , "nome": "Freezer", "preco": 7000},
-    {"id": 16 , "nome": "Mousepad", "preco": 33},
-
-
-]
-
+from app.models.products import products
+from app.models.product import Product
 def findProductById(id):
-    for product in produtos:
-        if product["id"] == id:
+    for product in products:
+        if product.getId() == id:
             return product
     return False
 
@@ -39,14 +20,15 @@ def index():
 
 @app.route("/paged")
 def paged():
+    time.sleep(3)
     page = request.args.get("page",1,type = int)
-    per_page = 5
+    per_page = 10
     start = (page-1) * per_page
     end = start + per_page
 
-    total_page = math.ceil(len(produtos)/per_page)
-    produtos_da_pagina = produtos[start:end]
-    return render_template("paged.html",produtos=produtos_da_pagina,page=page,total_page = total_page)
+    total_page = math.ceil(len(products)/per_page)
+    products_da_pagina = products[start:end]
+    return render_template("paged.html",products=products_da_pagina,page=page,total_page = total_page)
 
 @app.route("/seedetail/<int:id>")
 def detailed(id):
@@ -63,19 +45,20 @@ def admin():
     start = (page-1) * per_page
     end = start + per_page
 
-    total_page = math.ceil(len(produtos)/per_page)
-    produtos_da_pagina = produtos[start:end]
-    return render_template("admin.html",produtos=produtos_da_pagina,page=page,total_page = total_page)
+    total_page = math.ceil(len(products)/per_page)
+    products_da_pagina = products[start:end]
+    return render_template("admin.html",products=products_da_pagina,page=page,total_page = total_page)
 
 @app.route("/api/newproduct", methods=["POST","GET"])
 def newProduct():
     data = request.get_json()
     print(data)
     if data and "nome" in data:
-        produtos.append({
-            "id": len(produtos)+1,
-            "nome" : data["nome"],
-            "preco": data["preco"]
+        products.append({
+            Product( len(products)+1,
+            data["nome"],
+            data["preco"]
+            )
         })
         return jsonify({
             "Status": "OK"
@@ -85,9 +68,9 @@ def newProduct():
 
 @app.route("/api/exclude/<int:id>")
 def exclude(id):
-    for product in produtos:
+    for product in products:
         if ( product["id"] == id ):
-            produtos.remove(product)
+            products.remove(product)
             return jsonify({"Status": "OK, removido"})
         return jsonify({"Status": "Alguma coisa falhou"})
     
