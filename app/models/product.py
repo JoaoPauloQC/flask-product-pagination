@@ -1,6 +1,8 @@
 class Product():
 
-    def __init__(self,id,name,price,img_url):
+
+
+    def __init__(self,id,name,price,img_url=None):
         self.name = name
         self.id = id
         self.price = price

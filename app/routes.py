@@ -54,12 +54,12 @@ def newProduct():
     data = request.get_json()
     print(data)
     if data and "nome" in data:
-        products.append({
+        products.append(
             Product( len(products)+1,
             data["nome"],
             data["preco"]
             )
-        })
+        )
         return jsonify({
             "Status": "OK"
         })
