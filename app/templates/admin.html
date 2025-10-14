@@ -7,10 +7,10 @@
             <div class="product__list">
             {% for product in products %}
     
-                <div class="product_card">
-                    <h1>{{ product.getName() }}</h1>
+                <div class="product__card">
+                    <h1 class="product__card__title">{{ product.getName() }}</h1>
                     <p>R$ {{ product.getPrice() }}</p>
-                    <a href="seedetail/{{ product.getId()] }}" class="product__btn">Ver detalhes</a>
+                    <a href="seedetail/{{ product.getId() }}" class="product__btn">Ver detalhes</a>
                     <button id="product-{{ product.getId() }}" class="exclude__btn">Excluir</button>
 
                 </div>

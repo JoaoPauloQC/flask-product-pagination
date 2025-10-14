@@ -20,7 +20,7 @@ def index():
 
 @app.route("/paged")
 def paged():
-    time.sleep(3)
+    time.sleep(2)
     page = request.args.get("page",1,type = int)
     per_page = 10
     start = (page-1) * per_page

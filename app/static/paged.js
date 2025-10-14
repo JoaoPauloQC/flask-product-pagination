@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded",function(){
                 rotateState = parseInt(rotateState)
                 loading.style.transform = `rotate(${rotateState+1}deg)`
                 console.log(`Now ${loading.style.transform}`)
-            },5)
+            },2.5)
         }
 })
