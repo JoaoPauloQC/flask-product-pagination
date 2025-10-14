@@ -3,7 +3,7 @@ from app.models.product import Product
 
 
 products = [
-    Product(1, "Camiseta Básica", 49.90, "static/assets/productsimgs"),
+    Product(1, "Camiseta Básica", 49.90, "static/assets/productsimgs/basicBlackTshirt.webp"),
     Product(2, "Calça Jeans Slim", 139.90, "static/assets/productsimgs"),
     Product(3, "Tênis Esportivo", 259.90, "static/assets/productsimgs"),
     Product(4, "Jaqueta de Couro", 349.90, "static/assets/productsimgs"),
