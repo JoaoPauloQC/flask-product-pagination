@@ -14,7 +14,6 @@ from sqlalchemy import (
     Column, Integer, String, Date, DateTime, ForeignKey,
     Numeric, Boolean, Enum, Text, DECIMAL
 )
-
 import cloudinary
 from werkzeug.utils import secure_filename
 
