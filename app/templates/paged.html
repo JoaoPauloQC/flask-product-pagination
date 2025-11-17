@@ -13,11 +13,11 @@
 
             <div class="product__card text-center">
                 <div class="img__space">
-                    <img src="{{ product.getImgUrl() }}" alt="">
+                    <img src="{{ product.img_url }}" alt="">
                 </div>
-                <h1 class="product__card__title">{{ product.getName() }}</h1>
-                <p>R$ {{ product.getPrice() }}</p>
-                <a href="seedetail/{{ product.getId() }}" class="product__btn">Ver detalhes</a>
+                <h1 class="product__card__title">{{ product.name }}</h1>
+                <p>R$ {{ product.price }}</p>
+                <a href="seedetail/{{ product.id }}" class="product__btn">Ver detalhes</a>
             </div>
 
         {% endfor %}
@@ -34,6 +34,6 @@
     </div>
 
     </div>
-    <script src="{{ url_for("static",filename='paged.js') }}"></script>
+    <script src="{{ url_for('static',filename='paged.js') }}"></script>
 </div>
 {% endblock %}
