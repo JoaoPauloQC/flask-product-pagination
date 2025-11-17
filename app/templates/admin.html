@@ -8,10 +8,11 @@
             {% for product in products %}
     
                 <div class="product__card">
-                    <h1 class="product__card__title">{{ product.getName() }}</h1>
-                    <p>R$ {{ product.getPrice() }}</p>
-                    <a href="seedetail/{{ product.getId() }}" class="product__btn">Ver detalhes</a>
-                    <button id="product-{{ product.getId() }}" class="exclude__btn">Excluir</button>
+                    <img src="{{product.img_url}}" alt="">
+                    <h1 class="product__card__title">{{ product.name }}</h1>
+                    <p>R$ {{ product.price }}</p>
+                    <a href="seedetail/{{ product.id }}" class="product__btn">Ver detalhes</a>
+                    <button id="product-{{ product.id }}" class="exclude__btn">Excluir</button>
 
                 </div>
     
@@ -28,9 +29,10 @@
             
         </div>
         <div class="newproduct__content">
-        <form action="" id="newproduct__form">
+        <form enctype="multipart/form-data" method="post" id="newproduct__form" action="/api/newproduct">
             <input type="text" name="name" id="name" class="newproduct__input">
             <input type="text" name="price" id="price" class="newproduct__input">
+            <input type="file" name="img" id="img" class="newproduct__input">
             <button class="btn__blue border-1 radius-5 btn-lg-p">Novo Produto</button>
 
         </form>
