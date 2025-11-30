@@ -50,7 +50,7 @@ def paged():
     products = db.query(Product).all()
     time.sleep(2)
     page = request.args.get("page", 1, type=int)
-    per_page = 10
+    per_page = 4
     start = (page-1) * per_page
     end = start + per_page
 
@@ -73,7 +73,7 @@ def admin():
     products = db.query(Product).all()
     print(products)
     page = request.args.get("page", 1, type=int)
-    per_page = 5
+    per_page = 4
     start = (page-1) * per_page
     end = start + per_page
 
@@ -94,49 +94,28 @@ def getImgUrl(file):
     except:
         return None
 
-
 @app.route("/api/newproduct", methods=["POST", "GET"])
 def newProduct():
     db = SessionLocal()
-    products = db.query(Product).all()
     data = request.form
     file = request.files.get("img")
     print(f"* Data: {data}, File: {file}")
-    
-    secure_img_filename = secure_filename(file.filename)
 
-    complete_file_name = os.path.join(products_img_folder,secure_img_filename)
-    os.makedirs(products_img_folder,exist_ok=True)
-    file.save(complete_file_name)
-    img_url = complete_file_name
-    novo_produto = Product(name=data.get("name"),
-                                    price=data.get("price"),
-                                    img_url=img_url
-                                    )
+    
+    upload_result = cloudinary.uploader.upload(file)
+    img_url = upload_result.get("secure_url")
+    
+
+    novo_produto = Product(
+        name=data.get("name"),
+        price=data.get("price"),
+        img_url=img_url
+    )
+
     db.add(novo_produto)
     db.commit()
     return redirect(url_for("admin"))
-    # except :
-    #     print("Algo aconteceu",E) 
-    #     return url_for("admin")
-            
-    # if file:
 
-    #     if data and "name" in data:
-    #         print("hi")
-    #         img_url = getImgUrl(file)
-    #         if (img_url):
-
-    #             novo_produto = Product(name=data.get("name"),
-    #                                    price=data.get("price"),
-    #                                    img_url=img_url
-    #                                    )
-
-    #             db.add(novo_produto)
-    #             db.commit()
-    #             return url_for("admin")
-            
-    return url_for("admin")
 
 
 @app.route("/api/exclude/<int:id>")
